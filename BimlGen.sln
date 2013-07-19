@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BimlGen", "BimlGen.csproj", "{789F8598-FE4A-4C21-ABEE-B377F16926E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BimlGen.Tests", "BimlGen.Tests\BimlGen.Tests.csproj", "{D807E53C-B021-4E4D-B8E9-891A83DF176E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{789F8598-FE4A-4C21-ABEE-B377F16926E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{789F8598-FE4A-4C21-ABEE-B377F16926E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{789F8598-FE4A-4C21-ABEE-B377F16926E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{789F8598-FE4A-4C21-ABEE-B377F16926E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D807E53C-B021-4E4D-B8E9-891A83DF176E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D807E53C-B021-4E4D-B8E9-891A83DF176E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D807E53C-B021-4E4D-B8E9-891A83DF176E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D807E53C-B021-4E4D-B8E9-891A83DF176E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
