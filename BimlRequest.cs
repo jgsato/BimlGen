@@ -9,5 +9,6 @@
 		public bool HasDatabases { get; set; }
 		public bool HasSchemas { get; set; }
 		public bool HasTables { get; set; }
+		public bool HasFactsAndDimensions { get; set; }
 	}
 }

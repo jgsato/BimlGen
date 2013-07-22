@@ -41,8 +41,15 @@ namespace BimlGen
 				output.Databases = bimlService.GetDatabases( database );
 			if( request.HasSchemas )
 				output.Schemas = bimlService.GetSchemas( database );
-			if( request.HasTables )
-				output.Tables = bimlService.GetTables( database );
+			if (request.HasTables)
+			{
+				output.Tables = bimlService.GetTables( database, request.HasFactsAndDimensions );
+			}
+			if (request.HasFactsAndDimensions)
+			{
+				output.Facts = bimlService.GetFacts( database );
+				output.Dimensions = bimlService.GetDimensions( database );
+			}
 
 			return output;
 		}

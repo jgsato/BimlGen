@@ -20,10 +20,60 @@ namespace BimlGen
 
 		[XmlArray]
 		public List<Table> Tables { get; set; }
+
+		[XmlArray]
+		public List<Fact> Facts { get; set; }
+
+		[XmlArray]
+		public List<Dimension> Dimensions { get; set; }
 	}
 
 	[Serializable]
 	public class Table
+	{
+		[XmlAttribute]
+		public string Name { get; set; }
+
+		[XmlAttribute]
+		public string SchemaName { get; set; }
+
+		[XmlArray]
+		public List<Column> Columns { get; set; }
+
+		[XmlArray]
+		public List<Annotation> Annotations { get; set; }
+
+		[XmlArray]
+		public List<Index> Indexes { get; set; }
+
+		[XmlElement]
+		public Keys Keys { get; set; }
+	}
+
+	[Serializable]
+	public class Fact
+	{
+		[XmlAttribute]
+		public string Name { get; set; }
+
+		[XmlAttribute]
+		public string SchemaName { get; set; }
+
+		[XmlArray]
+		public List<Column> Columns { get; set; }
+
+		[XmlArray]
+		public List<Annotation> Annotations { get; set; }
+
+		[XmlArray]
+		public List<Index> Indexes { get; set; }
+
+		[XmlElement]
+		public Keys Keys { get; set; }
+	}
+
+	[Serializable]
+	public class Dimension
 	{
 		[XmlAttribute]
 		public string Name { get; set; }
@@ -60,7 +110,7 @@ namespace BimlGen
 		public string Length { get; set; }
 
 		[XmlAttribute]
-		public bool IsNullable { get; set; }
+		public string IsNullable { get; set; }
 
 		[XmlArray]
 		public List<Annotation> Annotations { get; set; }

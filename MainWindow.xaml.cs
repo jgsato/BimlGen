@@ -42,6 +42,7 @@ namespace BimlGen
 					HasDatabases = (bool) HasDatabase.IsChecked,
 					HasSchemas = (bool) HasSchemas.IsChecked,
 					HasTables = (bool) HasTables.IsChecked,
+					HasFactsAndDimensions = (bool) HasFactsAndDimensions.IsChecked
 				};
 				
 			var result = Task.Run( () => GetBiml( command ) );

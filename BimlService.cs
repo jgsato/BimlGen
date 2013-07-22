@@ -56,11 +56,18 @@ namespace BimlGen
 			return schemas;
 		}
 
-		public List<Table> GetTables( Microsoft.SqlServer.Management.Smo.Database database )
+		public List<Table> GetTables( Microsoft.SqlServer.Management.Smo.Database database, bool splitFactsAndDimensions )
 		{
 			var tables = new List<Table>();
 			foreach (Microsoft.SqlServer.Management.Smo.Table table in database.Tables)
 			{
+				if (splitFactsAndDimensions)
+				{
+					var tableName = table.Name.ToLower();
+					if (tableName.StartsWith( "dim" ) || tableName.StartsWith( "fact" ))
+						continue;
+				}
+
 				var bimlTable = new Table
 					{
 						Name = table.Name,
@@ -79,6 +86,60 @@ namespace BimlGen
 			return tables;
 		}
 
+		public List<Fact> GetFacts( Microsoft.SqlServer.Management.Smo.Database database )
+		{
+			var facts = new List<Fact>();
+			foreach( Microsoft.SqlServer.Management.Smo.Table table in database.Tables )
+			{
+				var tableName = table.Name.ToLower();
+				if( !tableName.StartsWith( "fact" ) )
+					continue;
+
+				var bimlTable = new Fact
+				{
+					Name = table.Name,
+					SchemaName = database.Name + "." + table.Schema,
+					Columns = GetColumns( table ),
+					Indexes = GetIndexes( table ),
+					Keys = GetKeys( table ),
+				};
+
+				var annotations = GetAnnotations( table.ExtendedProperties );
+				if( annotations.Any() )
+					bimlTable.Annotations = annotations;
+
+				facts.Add( bimlTable );
+			}
+			return facts;
+		}
+
+		public List<Dimension> GetDimensions( Microsoft.SqlServer.Management.Smo.Database database )
+		{
+			var dimensions = new List<Dimension>();
+			foreach( Microsoft.SqlServer.Management.Smo.Table table in database.Tables )
+			{
+				var tableName = table.Name.ToLower();
+				if( !tableName.StartsWith( "dim" ) )
+					continue;
+
+				var bimlTable = new Dimension
+				{
+					Name = table.Name,
+					SchemaName = database.Name + "." + table.Schema,
+					Columns = GetColumns( table ),
+					Indexes = GetIndexes( table ),
+					Keys = GetKeys( table ),
+				};
+
+				var annotations = GetAnnotations( table.ExtendedProperties );
+				if( annotations.Any() )
+					bimlTable.Annotations = annotations;
+
+				dimensions.Add( bimlTable );
+			}
+			return dimensions;
+		}
+
 		public List<Column> GetColumns( Microsoft.SqlServer.Management.Smo.Table table )
 		{
 			var columns = new List<Column>();
@@ -89,8 +150,10 @@ namespace BimlGen
 					{
 						Name = column.Name,
 						DataType = dataType,
-						IsNullable = column.Nullable
 					};
+
+				if (column.Nullable)
+					bimlColumn.IsNullable = true.ToString();
 
 				bool dataTypeHasLength = ( dataType.Equals( "string", StringComparison.InvariantCultureIgnoreCase )
 				                           || dataType.Equals( "binary", StringComparison.CurrentCultureIgnoreCase ) );
