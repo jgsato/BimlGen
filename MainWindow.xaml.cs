@@ -33,7 +33,18 @@ namespace BimlGen
 				throw new Exception( "Please complete all form fields" );
 			}
 
-			var result = Task.Run( () => GetBiml( serverName, databaseName, outputFolder ) );
+			var command = new BimlRequest
+				{
+					ServerName = serverName,
+					DatabaseName = databaseName,
+					OutputFolder = outputFolder,
+					HasConnections = (bool) HasConnections.IsChecked,
+					HasDatabases = (bool) HasDatabase.IsChecked,
+					HasSchemas = (bool) HasSchemas.IsChecked,
+					HasTables = (bool) HasTables.IsChecked,
+				};
+				
+			var result = Task.Run( () => GetBiml( command ) );
 			result.ContinueWith( t => OpenExplorer( outputFolder ) );
 			result.ContinueWith( t => ToggleSubmit( Submit ),
 			                     CancellationToken.None,
@@ -41,14 +52,14 @@ namespace BimlGen
 			                     TaskScheduler.FromCurrentSynchronizationContext() );
 		}
 
-		private void GetBiml(string serverName, string databaseName, string outputFolder)
+		private void GetBiml( BimlRequest request)
 		{
-			var biml = BimlGenerator.GetBiml( serverName, databaseName );
+			var biml = BimlGenerator.GetBiml( request );
 			if( !string.IsNullOrEmpty( biml ) )
 			{
 				var now = DateTime.Now;
 				var timestamp = "" + now.Hour + now.Minute + now.Second;
-				File.WriteAllText( string.Format("{0}\\{1}{2}.biml", outputFolder, databaseName, timestamp), biml );
+				File.WriteAllText( string.Format( "{0}\\{1}{2}.biml", request.OutputFolder, request.DatabaseName, timestamp ), biml );
 			}
 		}
 

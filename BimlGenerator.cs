@@ -10,9 +10,9 @@ namespace BimlGen
 {
 	public class BimlGenerator
 	{
-		public static string GetBiml( string serverName, string databaseName )
+		public static string GetBiml( BimlRequest request )
 		{
-			var biml = BuildBiml( serverName, databaseName );
+			var biml = BuildBiml( request );
 
 			var serializer = new XmlSerializer( biml.GetType() );
 			using (var writer = new StringWriter())
@@ -22,23 +22,29 @@ namespace BimlGen
 			}
 		}
 
-		public static Biml BuildBiml( string serverName, string databaseName )
+		public static Biml BuildBiml( BimlRequest request )
 		{
 			// Configure SQL SMO
-			var server = new Server( serverName );
+			var server = new Server( request.ServerName );
 			var scriptingOptions = new ScriptingOptions { Encoding = Encoding.UTF8 };
 			server.Script( scriptingOptions );
-			var database = new Microsoft.SqlServer.Management.Smo.Database( server, databaseName );
+			var database = new Microsoft.SqlServer.Management.Smo.Database( server, request.DatabaseName );
 			database.Refresh();
 
 			var bimlService = new BimlService();
-			return new Biml
-			{
-				Connections = bimlService.GetConnections( server, database ),
-				Databases = bimlService.GetDatabases( database ),
-				Schemas = bimlService.GetSchemas( database ),
-				Tables = bimlService.GetTables( database ),
-			};
+			var output = new Biml();
+			
+			// Selectively build sections
+			if ( request.HasConnections )
+				output.Connections = bimlService.GetConnections( server, database );
+			if ( request.HasDatabases )
+				output.Databases = bimlService.GetDatabases( database );
+			if( request.HasSchemas )
+				output.Schemas = bimlService.GetSchemas( database );
+			if( request.HasTables )
+				output.Tables = bimlService.GetTables( database );
+
+			return output;
 		}
 
 		public static bool IsValidBiml( string xml )

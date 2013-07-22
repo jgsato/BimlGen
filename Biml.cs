@@ -59,8 +59,11 @@ namespace BimlGen
 		[XmlAttribute]
 		public string Length { get; set; }
 
+		[XmlAttribute]
+		public bool IsNullable { get; set; }
+
 		[XmlArray]
-		public List<Annotation> Annotations { get; set; } 
+		public List<Annotation> Annotations { get; set; }
 	}
 
 	[Serializable]

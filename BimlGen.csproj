@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Biml.cs" />
     <Compile Include="BimlGenerator.cs" />
+    <Compile Include="BimlRequest.cs" />
     <Compile Include="BimlService.cs" />
     <Compile Include="DataTypeMapper.cs" />
   </ItemGroup>

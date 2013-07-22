@@ -89,6 +89,7 @@ namespace BimlGen
 					{
 						Name = column.Name,
 						DataType = dataType,
+						IsNullable = column.Nullable
 					};
 
 				bool dataTypeHasLength = ( dataType.Equals( "string", StringComparison.InvariantCultureIgnoreCase )

@@ -96,8 +96,15 @@ namespace BimlGen.Tests
 		public void SmoRetrievesData()
 		{
 			// Given a database connection
+			var request = new BimlRequest
+				{
+					ServerName = "SERVERNAME",
+					DatabaseName = "AdventureWorks2008R2",
+					HasConnections = true
+				};
+
 			// When the BIML is generated
-			var biml = BimlGenerator.GetBiml( "SERVERNAME", "AdventureWorks2008R2" );
+			var biml = BimlGenerator.GetBiml( request );
 
 			// Then valid XML is generated
 			biml.Should().NotBeNullOrEmpty();
