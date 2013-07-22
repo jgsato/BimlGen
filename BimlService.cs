@@ -153,9 +153,10 @@ namespace BimlGen
 					};
 
 				if (column.Nullable)
-					bimlColumn.IsNullable = true.ToString();
+					bimlColumn.IsNullable = true.ToString().ToLower();
 
 				bool dataTypeHasLength = ( dataType.Equals( "string", StringComparison.InvariantCultureIgnoreCase )
+				                           || dataType.Equals( "ansistring", StringComparison.InvariantCultureIgnoreCase )
 				                           || dataType.Equals( "binary", StringComparison.CurrentCultureIgnoreCase ) );
 				if (dataTypeHasLength)
 					bimlColumn.Length = column.DataType.MaximumLength.ToString();

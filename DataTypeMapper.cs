@@ -25,11 +25,12 @@ namespace BimlGen
 					return typeof( bool ).ToString();
 
 				case "char":
+				case "varchar":
+					return "AnsiString";
 				case "nchar":
 				case "ntext":
 				case "nvarchar":
 				case "text":
-				case "varchar":
 				case "xml":
 				case "sysname":
 					return typeof( string ).ToString();
