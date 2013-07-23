@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.SqlServer.Management.Smo;
 
@@ -155,11 +156,11 @@ namespace BimlGen
 				if (column.Nullable)
 					bimlColumn.IsNullable = true.ToString().ToLower();
 
-				bool dataTypeHasLength = ( dataType.Equals( "string", StringComparison.InvariantCultureIgnoreCase )
-				                           || dataType.Equals( "ansistring", StringComparison.InvariantCultureIgnoreCase )
-				                           || dataType.Equals( "binary", StringComparison.CurrentCultureIgnoreCase ) );
+				bool dataTypeHasLength = ( dataType.Equals( "string", StringComparison.OrdinalIgnoreCase )
+										   || dataType.Equals( "ansistring", StringComparison.OrdinalIgnoreCase )
+										   || dataType.Equals( "binary", StringComparison.OrdinalIgnoreCase ) );
 				if (dataTypeHasLength)
-					bimlColumn.Length = column.DataType.MaximumLength.ToString();
+					bimlColumn.Length = column.DataType.MaximumLength.ToString( CultureInfo.InvariantCulture );
 
 				var annotations = GetAnnotations( column.ExtendedProperties );
 				if (annotations.Any())
