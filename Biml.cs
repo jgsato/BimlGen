@@ -38,10 +38,10 @@ namespace BimlGen
 		public string SchemaName { get; set; }
 
 		[XmlArray]
-		public List<Column> Columns { get; set; }
+		public List<Annotation> Annotations { get; set; }
 
 		[XmlArray]
-		public List<Annotation> Annotations { get; set; }
+		public List<Column> Columns { get; set; }
 
 		[XmlArray]
 		public List<Index> Indexes { get; set; }
@@ -60,10 +60,10 @@ namespace BimlGen
 		public string SchemaName { get; set; }
 
 		[XmlArray]
-		public List<Column> Columns { get; set; }
+		public List<Annotation> Annotations { get; set; }
 
 		[XmlArray]
-		public List<Annotation> Annotations { get; set; }
+		public List<Column> Columns { get; set; }
 
 		[XmlArray]
 		public List<Index> Indexes { get; set; }
@@ -82,10 +82,10 @@ namespace BimlGen
 		public string SchemaName { get; set; }
 
 		[XmlArray]
-		public List<Column> Columns { get; set; }
+		public List<Annotation> Annotations { get; set; }
 
 		[XmlArray]
-		public List<Annotation> Annotations { get; set; }
+		public List<Column> Columns { get; set; }
 
 		[XmlArray]
 		public List<Index> Indexes { get; set; }
@@ -136,10 +136,10 @@ namespace BimlGen
 		public string Name { get; set; }
 
 		[XmlArray]
-		public List<Column> Columns { get; set; }
+		public List<Annotation> Annotations { get; set; } 
 
 		[XmlArray]
-		public List<Annotation> Annotations { get; set; } 
+		public List<Column> Columns { get; set; }
 	}
 
 	[Serializable]
@@ -159,10 +159,10 @@ namespace BimlGen
 		public string Name { get; set; }
 
 		[XmlArray]
-		public List<Column> Columns { get; set; }
+		public List<Annotation> Annotations { get; set; }
 
 		[XmlArray]
-		public List<Annotation> Annotations { get; set; }
+		public List<Column> Columns { get; set; }
 	}
 
 	[Serializable]
@@ -172,10 +172,10 @@ namespace BimlGen
 		public string Name { get; set; }
 
 		[XmlArray]
-		public List<Column> Columns { get; set; }
+		public List<Annotation> Annotations { get; set; }
 
 		[XmlArray]
-		public List<Annotation> Annotations { get; set; }
+		public List<Column> Columns { get; set; }
 	}
 
 	[Serializable]
