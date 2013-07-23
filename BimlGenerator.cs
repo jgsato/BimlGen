@@ -71,9 +71,12 @@ namespace BimlGen
 			Assembly myAssembly = Assembly.GetExecutingAssembly();
 			using (Stream schemaStream = myAssembly.GetManifestResourceStream( "BimlGen.Resources.Biml.xsd" ))
 			{
-				using (XmlReader schemaReader = XmlReader.Create( schemaStream ))
+				if (schemaStream != null)
 				{
-					settings.Schemas.Add( null, schemaReader );
+					using (XmlReader schemaReader = XmlReader.Create( schemaStream ))
+					{
+						settings.Schemas.Add( null, schemaReader );
+					}
 				}
 			}
 			
