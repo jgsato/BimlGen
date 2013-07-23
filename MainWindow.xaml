@@ -13,8 +13,8 @@
         <CheckBox Name="HasConnections" Content="Connections" HorizontalAlignment="Left" Margin="115,132,0,0" VerticalAlignment="Top" />
         <CheckBox Name="HasDatabase" Content="Database" HorizontalAlignment="Left" Margin="115,154,0,0" VerticalAlignment="Top" />
         <CheckBox Name="HasSchemas"  Content="Schemas" HorizontalAlignment="Left" Margin="115,175,0,0" VerticalAlignment="Top" />
-        <CheckBox Name="HasTables" Content="Tables" HorizontalAlignment="Left" Margin="115,196,0,0" VerticalAlignment="Top" />
-        <CheckBox Name="HasFactsAndDimensions" Content="Facts &amp; Dimensions" HorizontalAlignment="Left" Margin="115,217,0,0" VerticalAlignment="Top" />
+        <CheckBox Name="HasTables" IsChecked="True" Content="Tables" HorizontalAlignment="Left" Margin="115,196,0,0" VerticalAlignment="Top" />
+        <CheckBox Name="HasFactsAndDimensions" IsChecked="True" Content="Facts &amp; Dimensions" HorizontalAlignment="Left" Margin="115,217,0,0" VerticalAlignment="Top" />
         <Button Name="Submit" Content="Generate" IsDefault="True" HorizontalAlignment="Left" Margin="115,253,0,0" VerticalAlignment="Top" Width="75" Click="Submit_Click"/>
     </Grid>
 </Window>
