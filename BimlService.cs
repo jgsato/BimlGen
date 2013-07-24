@@ -158,6 +158,7 @@ namespace BimlGen
 
 				bool dataTypeHasLength = ( dataType.Equals( "string", StringComparison.OrdinalIgnoreCase )
 										   || dataType.Equals( "ansistring", StringComparison.OrdinalIgnoreCase )
+										   || dataType.Equals( "ansistringfixedlength", StringComparison.OrdinalIgnoreCase )
 										   || dataType.Equals( "binary", StringComparison.OrdinalIgnoreCase ) );
 				if (dataTypeHasLength)
 					bimlColumn.Length = column.DataType.MaximumLength.ToString( CultureInfo.InvariantCulture );
